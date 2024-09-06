@@ -15,13 +15,22 @@ for (let z = 1; z >= -1; z--) {
   }
 }
 
+// let cubesObject = {};
+// for (let i = 0; i < 27; i++) {
+//   cubesObject[i] =
+// }
 const CubeHolder = (props: Props) => {
   const meshRef = useRef();
   useFrame((state, delta) => (meshRef.current.rotation.x += delta));
+  useFrame((state, delta) => (meshRef.current.rotation.y += delta));
 
   return (
     <mesh {...props} ref={meshRef}>
-      <Box color="blue" position={[0, 0, 0]} />
+      <group>
+        {cubePositions.map((cubit, i) => {
+          return <Box color="blue" position={cubePositions[i]} />;
+        })}
+      </group>
     </mesh>
   );
 };
