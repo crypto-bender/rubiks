@@ -10,7 +10,7 @@ import CubeHolder from './components/CubeHolder';
 function App() {
   return (
     <div id="threeContainer">
-      <CanvasContainer cube={<CubeHolder />}></CanvasContainer>
+      <CanvasContainer cube={<CubeHolder />} />
     </div>
   );
 }

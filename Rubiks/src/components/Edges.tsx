@@ -7,7 +7,7 @@ type Props = {
 };
 
 const Edges = (props: Props) => {
-  const geometry = new THREE.BoxGeometry(1, 1, 1);
+  const geometry = new THREE.BoxGeometry(0.95, 0.95, 0.95);
   const edges = new THREE.EdgesGeometry(geometry);
 
   return (
