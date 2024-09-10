@@ -6,11 +6,13 @@ import { ColorArray } from '../utils/CubeUtils';
 
 type Props = {
   color: {};
+  cubeIn: any;
+  cubeOut: any;
 };
 
-//modify Box component to take an object of cube color mappings to dynamically render color as faces are rotated and so that unseen faces
-//appear black
 const Box = (props: Props) => {
+  const [highlight, setHighlight] = useState(false);
+
   let color = props.color;
   let faces = [];
   for (let shade in color) {
@@ -20,15 +22,32 @@ const Box = (props: Props) => {
         : ColorArray[color[shade][0]][color[shade][1]];
   }
 
+  const handlePointerOver = (e) => {
+    e.stopPropagation();
+    props.cubeIn();
+    setHighlight(true);
+  };
+
+  const handlePointerOut = (e) => {
+    props.cubeOut();
+    setHighlight(false);
+  };
   return (
-    <mesh {...props}>
+    <mesh
+      {...props}
+      onPointerOver={handlePointerOver}
+      onPointerOut={handlePointerOut}
+    >
       <boxGeometry args={[0.95, 0.95, 0.95]} />
       {faces.map((face, i) => {
         return (
-          <meshBasicMaterial key={i} attach={`material-${i}`} color={face} />
+          <meshBasicMaterial
+            key={i}
+            attach={`material-${i}`}
+            color={highlight ? 'purple' : face}
+          />
         );
       })}
-      <Edges color="black" />
     </mesh>
   );
 };

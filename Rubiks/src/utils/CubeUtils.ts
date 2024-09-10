@@ -225,3 +225,15 @@ export const ColorArray = [
   Array(9).fill('yellow'),
   Array(9).fill('green'),
 ];
+
+export const generateCubePositions = () => {
+  let positions = [];
+  for (let z = 1; z >= -1; z--) {
+    for (let y = -1; y <= 1; y++) {
+      for (let x = 1; x >= -1; x--) {
+        positions.push([x, y, z]);
+      }
+    }
+  }
+  return positions;
+};
